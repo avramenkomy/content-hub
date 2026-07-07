@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { cn } from '@/src/lib/cn';
+import { cn } from '@/lib/cn';
 
 type CardProps = {
   children: ReactNode,

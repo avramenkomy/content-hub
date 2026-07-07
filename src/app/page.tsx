@@ -1,6 +1,6 @@
-import Button from '@/src/components/ui/Button';
-import Card from '@/src/components/ui/Card';
-import Container from '@/src/components/ui/Container';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Container from '@/components/ui/Container';
 
 interface FeatureItem {
   title: string,

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import navigation from '@/src/data/navigation';
+import navigation from '@/data/navigation';
 import Container from '../ui/Container';
 
 

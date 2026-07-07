@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { cn } from '@/src/lib/cn';
+import { cn } from '@/lib/cn';
 
 type Variant = 'primary' | 'secondary';
 
@@ -16,9 +16,9 @@ export default function Button(props: ButtonProps) {
   const { href, children, variant='primary', className } = props;
 
   const buttonClassName = cn(
-    'inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition',
-    variant === 'primary' && 'bg-white text-zinc-950 hover:bg-zinc-200',
-    variant === 'secondary' && 'border border-zinc-700 text-zinc-100 hover:border-zinc-500 hover:bg-zinc-900',
+    'inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition',
+    variant === 'primary' && 'bg-white text-zinc-800 hover:bg-zinc-200',
+    variant === 'secondary' && 'border border-zinc-700 bg-transparent text-zinc-100 hover:border-zinc-500 hover:bg-zinc-900',
     className,
   );
 

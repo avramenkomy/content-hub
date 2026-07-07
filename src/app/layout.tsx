@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import Header from '@/src/components/layout/Header';
-import site from '@/src/data/site';
+import Header from '@/components/layout/Header';
+import site from '@/data/site';
 
 import './globals.css';
 
