@@ -27,12 +27,21 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link
-          href="/login"
-          className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
-        >
-          Sign in
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/login"
+            className="hidden text-sm text-zinc-400 transition hover:text-white sm:inline"
+          >
+            Sign in
+          </Link>
+
+          <Link
+            href="/register"
+            className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
+          >
+            Register
+          </Link>
+        </div>
       </Container>
     </header>
   )
