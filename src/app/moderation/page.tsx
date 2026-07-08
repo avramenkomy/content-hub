@@ -1,6 +1,10 @@
 import Link from 'next/link';
+
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
+
+import ModerationActions from '@/components/posts/ModerationActions';
+
 import prisma from '@/lib/prisma';
 import { requireRole } from '@/lib/auth';
 
@@ -67,29 +71,8 @@ export default async function ModerationPage() {
                       </div>
                     </div>
 
-                    <div>
-                      <Link
-                        href={`/posts/${post.slug}`}
-                        className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
-                      >
-                        Public page
-                      </Link>
-
-                      <button
-                        type="button"
-                        disabled
-                        className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 opacity-50"
-                      >
-                        Approve soon
-                      </button>
-
-                      <button
-                        type="button"
-                        disabled
-                        className="rounded-full border border-red-900/70 px-4 py-2 text-sm text-red-200 opacity-50"
-                      >
-                        Reject soon
-                      </button>
+                    <div className="shrink-0">
+                      <ModerationActions postId={post.id} />
                     </div>
                   </div>
                 </Card>
