@@ -13,6 +13,7 @@ datasource db {
 }
 
 // создание моделей БД
+
 enum Role {
   USER
   MODERATOR
@@ -40,9 +41,23 @@ model User {
   role          Role        @default(USER)
   imageUrl      String?
   posts         Post[]
+  sessions      Session[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
+
+
+model Session {
+  id            String @id @default(cuid())
+  tokenHash     String @unique
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt     DateTime
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+}
+
 
 model Post {
   id            String      @id @default(cuid())
@@ -53,10 +68,8 @@ model Post {
   imageUrl      String?
   status        PostStatus
   rejectReason  String?
-
   authorId      String
   author        User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
-
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -69,7 +82,6 @@ model ContactMessage {
   subject       String
   message       String
   status        ContactMessageStatus   @default(NEW)
-
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
 }
