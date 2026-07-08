@@ -1,4 +1,4 @@
-import { redirect, RedirectType } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import LogoutButton from '@/components/auth/LogoutButton';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';

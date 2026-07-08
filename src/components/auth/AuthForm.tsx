@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { FormEvent, SubmitEvent, useState } from 'react';
+import { SubmitEvent, useState } from 'react';
 import Link from 'next/link';
 
 type AuthFormProps = {
