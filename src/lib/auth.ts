@@ -1,5 +1,5 @@
 // auth helper
-
+import { redirect } from 'next/navigation';
 import crypto from 'crypto';
 import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
@@ -92,4 +92,29 @@ export async function destroyCurrentSession() {
   }
 
   cookieStore.delete(SESSION_COOKIE_NAME);
+}
+
+
+export type AppRole = 'USER' | 'MODERATOR' | 'ADMIN';
+
+
+// Пускает только авторизованного пользователя
+export async function requireCurrentUser() {
+  const user = await getCurrentUser();
+
+  if (!user) redirect('/login');
+
+  return user;
+}
+
+// Пускает только пользователя или несколько пользователей с переданными
+// в параметрах ролями
+export async function requireRole(allowedRoles: AppRole[]) {
+  const user = await requireCurrentUser();
+
+  if (!allowedRoles.includes(user.role as AppRole)) {
+    redirect('/dashboard');
+  }
+
+  return user;
 }

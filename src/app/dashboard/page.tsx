@@ -60,15 +60,29 @@ export default async function DashboardPage() {
           <Card>
             <h2 className="text-lg font-semibold text-white">Moderation</h2>
             <p className="mt-3 text-sm leading-6 text-zinc-400">
-              Moderators will review pending posts and approve or reject them.
+              Moderators can review pending posts and approve or reject them.
             </p>
+
+            <a
+              href="/moderation"
+              className="mt-5 inline-flex text-sm font-medium text-white hover:text-zinc-300"
+            >
+              Open moderation
+            </a>
           </Card>
 
           <Card>
             <h2 className="text-lg font-semibold text-white">Admin</h2>
             <p className="mt-3 text-sm leading-6 text-zinc-400">
-              Admins will manage users, roles and platform content.
+              Admins can manage users, roles and platform content.
             </p>
+
+            <a
+              href="/admin"
+              className="mt-5 inline-flex text-sm font-medium text-white hover:text-zinc-300"
+            >
+              Open admin
+            </a>
           </Card>
         </div>
       </Container>
