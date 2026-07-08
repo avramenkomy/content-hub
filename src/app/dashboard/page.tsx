@@ -55,6 +55,13 @@ export default async function DashboardPage() {
             <p className="mt-3 text-sm leading-6 text-zinc-400">
               Here users will create and manage their own posts.
             </p>
+
+            <a
+              href="/dashboard/posts"
+              className="mt-5 inline-flex text-sm font-medium text-white hover:text-zinc-300"
+            >
+              Manage my posts
+            </a>
           </Card>
 
           <Card>
