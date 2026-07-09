@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
+import UserRoleActions from '@/components/admin/UserRoleActions';
 import prisma from '@/lib/prisma';
 import { requireRole } from '@/lib/auth';
 
@@ -88,24 +89,28 @@ export default async function AdminPage() {
         <section className="mt-10">
           <h2 className="text-2xl font-semibold text-white">Users</h2>
 
-          <div className="mt-6 overflow-hidden rounded-2xl border border-zinc-800">
-            <div className="grid grid-cols-4 gap-4 border-b border-zinc-800 bg-zinc-900 px-5 py-4 text-sm font-medium text-zinc-400">
-              <span>Name</span>
-              <span>Email</span>
-              <span>Role</span>
-              <span>Posts</span>
-            </div>
+          <div className="mt-6 space-y-4">
+            {users.map(usr => (
+              <Card key={usr.id}>
+                <div className="grid gap-6 lg:grid-cols-[1fr_260px] lg:items-start">
+                  <div>
+                    <p className="text-lg font-semibold text-white">{usr.name}</p>
 
-            {users.map((item) => (
-              <div
-                key={item.id}
-                className="grid grid-cols-4 gap-4 border-b border-zinc-800 px-5 py-4 text-sm text-zinc-300 last:border-b-0"
-              >
-                <span>{item.name}</span>
-                <span className="break-all">{item.email}</span>
-                <span>{item.role}</span>
-                <span>{item._count.posts}</span>
-              </div>
+                    <p className="mt-2 break-all text-sm text-zinc-400">{usr.email}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-3 text-sm text-zinc-500">
+                      <span>Current role: {usr.role}</span>
+                      <span>Posts: {usr._count.posts}</span>
+                    </div>
+                  </div>
+
+                  <UserRoleActions
+                    userId={usr.id}
+                    currentRole={usr.role}
+                    disabled={usr.id === user.id}
+                  />
+                </div>
+              </Card>
             ))}
           </div>
         </section>
