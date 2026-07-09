@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 import Container from '@/components/ui/Container';
 import LogoutButton from '@/components/auth/LogoutButton';
+import MobileMenu from './MobileMenu';
 
-import navigation from '@/data/navigation';
+import navigation, { AppRole } from '@/data/navigation';
 
 import { getCurrentUser } from '@/lib/auth';
 
@@ -28,14 +29,21 @@ export default async function Header() {
     return true;
   });
 
+  const mobileUser = user
+    ? {
+        name: user.name,
+        role: user.role as AppRole
+      }
+    : null
+
   return (
     <header
-      className="sticky top-0 z-50 border-b border-zinc-500 bg-zinc-950/80 backdrop-blur"
+      className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-zinc-950/80 backdrop-blur"
     >
       <Container
-        className="flex h-16 items-center justify-between"
+        className="relative flex h-16 items-center justify-between gap-6"
       >
-        <Link href="/" className="text-sm font-semibold tracking-wide text-white">
+        <Link href="/" className="shrink-0 text-sm font-semibold tracking-wide text-white">
           Content Hub
         </Link>
 
@@ -51,37 +59,42 @@ export default async function Header() {
           ))}
         </nav>
 
-        {user
-          ? <div className="flex shrink-0 items-center gap-3">
-              <Link
-                href="/dashboard"
-                className="hidden text-sm text-zinc-400 transition hover:text-white sm:inline"
-              >
-                {user.name}
-              </Link>
+        <div className="hidden shrink-0 items-center gap-3 md:flex">
 
-              <span className="hidden rounded-full border border-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400 lg:inline">
-                {user.role}
-              </span>
+          {user
+            ? <>
+                <Link
+                  href="/dashboard"
+                  className="text-sm text-zinc-400 transition hover:text-white"
+                >
+                  {user.name}
+                </Link>
 
-              <LogoutButton compact />
-            </div>
-          : <div className="flex shrink-0 items-center gap-3">
-              <Link
-                href="/login"
-                className="hidden text-sm text-zinc-400 transition hover:text-white sm:inline"
-              >
-                Sign in
-              </Link>
+                <span className="hidden rounded-full border border-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400 lg:inline">
+                  {user.role}
+                </span>
 
-              <Link
-                href="/register"
-                className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
-              >
-                Register
-              </Link>
-            </div>
-        }
+                <LogoutButton compact />
+              </>
+            : <>
+                <Link
+                  href="/login"
+                  className="text-sm text-zinc-400 transition hover:text-white"
+                >
+                  Sign in
+                </Link>
+
+                <Link
+                  href="/register"
+                  className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
+                >
+                  Register
+                </Link>
+              </>
+          }
+        </div>
+
+        <MobileMenu navigation={visiblenavigation} user={mobileUser} />
       </Container>
     </header>
   )

@@ -1,13 +1,14 @@
 /** навигация сайта */
+export type AppRole = 'USER' | 'MODERATOR' | 'ADMIN';
 
-interface NavItem {
+export type NavItem = {
   label: string,
   href: string,
   authOnly?: boolean,
-  roles?: Array<'USER' | 'MODERATOR' | 'ADMIN'>
+  roles?: AppRole[]
 }
 
-type Navigation = NavItem[];
+export type Navigation = NavItem[];
 
 const navigation: Navigation = [
   {
