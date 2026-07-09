@@ -3,6 +3,8 @@
 interface NavItem {
   label: string,
   href: string,
+  authOnly?: boolean,
+  roles?: Array<'USER' | 'MODERATOR' | 'ADMIN'>
 }
 
 type Navigation = NavItem[];
@@ -21,16 +23,21 @@ const navigation: Navigation = [
   {
     label: 'Dashboard',
     href: '/dashboard',
+    authOnly: true,
   },
 
   {
     label: 'Moderation',
     href: '/moderation',
+    authOnly: true,
+    roles: ["MODERATOR", "ADMIN"],
   },
 
   {
     label: 'Admin',
     href: '/admin',
+    authOnly: true,
+    roles: ["ADMIN"],
   },
 
   {
