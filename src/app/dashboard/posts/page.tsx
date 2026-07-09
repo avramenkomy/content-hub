@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
+import DeletePostButton from '@/components/posts/DeletePostButton';
 import prisma from '@/lib/prisma';
 import { requireCurrentUser } from '@/lib/auth';
 
@@ -71,16 +72,27 @@ export default async function DashboardPostsPage() {
                         }
                       </div>
 
-                      <div className="shrink-0 text-sm text-zinc-500">
+                      <div className="flex shrink-0 flex-col gap-3 text-sm">
+                        <Link
+                          href={`/dashboard/posts/${post.id}/edit`}
+                          className="rounded-full border border-zinc-700 px-4 py-2 text-center text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-900"
+                        >
+                          Edit
+                        </Link>
+
                         {post.status === "APPROVED"
                           ? <Link
                               href={`/posts/${post.slug}`}
-                              className="text-white hover:text-zinc-300"
+                              className="rounded-full bg-white px-4 py-2 text-center font-semibold text-zinc-950 transition hover:bg-zinc-200"
                             >
                               View public page
                             </Link>
-                          : <span>Not public yet</span>
+                          : <span className="px-4 py-2 text-center text-zinc-500">
+                              Not public yet
+                            </span>
                         }
+
+                        <DeletePostButton postId={post.id} />
                       </div>
                     </div>
                   </Card>
