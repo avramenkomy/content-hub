@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
 import prisma from '@/lib/prisma';
@@ -74,6 +75,13 @@ export default async function AdminPage() {
             <p className="mt-2 text-3xl font-bold text-white">
               {contactMessages}
             </p>
+
+            <Link
+              href="/admin/messages"
+              className="mt-5 inline-flex text-sm font-medium text-white hover:text-zinc-300"
+            >
+              Open messages
+            </Link>
           </Card>
         </div>
 
